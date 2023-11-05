@@ -30,7 +30,6 @@ input AddEmployeeInput{
 input UpdateSalaryInput{
     employeeId: ID!
     salary: String
-    departmentId: ID!
 }
 
 type Subscription{

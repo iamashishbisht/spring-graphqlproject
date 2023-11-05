@@ -1,7 +1,9 @@
 package com.project.graphqlproject.springgraphqlproject.controller;
 
 import com.project.graphqlproject.springgraphqlproject.model.AddEmployeeInput;
+import com.project.graphqlproject.springgraphqlproject.model.Department;
 import com.project.graphqlproject.springgraphqlproject.model.Employee;
+import com.project.graphqlproject.springgraphqlproject.model.UpdateSalaryInput;
 import com.project.graphqlproject.springgraphqlproject.repository.DepartmentRepository;
 import com.project.graphqlproject.springgraphqlproject.repository.EmployeeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -9,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.SubscriptionMapping;
 import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Controller
@@ -52,4 +56,23 @@ public class GraphqlController {
     public List<Employee> employeeByName(@Argument String employeeName){
         return this.employeeRepository.getEmployeeByName(employeeName);
     }
+
+    @MutationMapping
+    public Optional<Employee> updateSalary(@Argument UpdateSalaryInput updateSalaryInput){
+        return employeeRepository.findById(updateSalaryInput.getEmployeeId()).
+                map(employee -> {employee.setSalary(updateSalaryInput.getSalary());
+                        return employeeRepository.save(employee);
+                });
+    }
+
+    @QueryMapping
+    public List<Department> allDepartment(){
+        return departmentRepository.findAll();
+    }
+
+    @SubscriptionMapping
+    public List<Employee> allEmployee(){
+        return employeeRepository.findAll();
+    }
+
 }
