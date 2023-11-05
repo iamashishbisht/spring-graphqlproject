@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication(scanBasePackages = {"repository","model"})
+@SpringBootApplication
 public class SpringGraphqlprojectApplication {
 
 	public static void main(String[] args) {

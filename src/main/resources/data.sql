@@ -1,6 +1,0 @@
-insert into department(name) values('IT')
-insert into department(name) values('Admin')
-insert into department(name) values('Frontend')
-insert into department(name) values('Devops')
-insert into department(name) values('FullStack')
-insert into department(name) values('Backend')

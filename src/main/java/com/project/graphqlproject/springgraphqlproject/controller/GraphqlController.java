@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.function.Function;
 
 @Controller
@@ -41,14 +42,14 @@ public class GraphqlController {
 
     //@SchemaMapping(typeName = "Mutation", field = "addEmployee")
     @MutationMapping
-    public Mono<Employee> addEmployee(@Argument AddEmployeeInput addEmployee){
+    public Employee addEmployee(@Argument AddEmployeeInput addEmployee){
         // method name and argument name should match what defined within graphql file
         log.info("add Employee method");
         return this.employeeRepository.save(mapping.apply(addEmployee));
     }
 
     @QueryMapping
-    public Flux<Employee> employeeByName(@Argument String employeeName){
+    public List<Employee> employeeByName(@Argument String employeeName){
         return this.employeeRepository.getEmployeeByName(employeeName);
     }
 }

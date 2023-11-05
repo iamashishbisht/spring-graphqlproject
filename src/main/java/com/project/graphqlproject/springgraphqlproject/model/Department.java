@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -19,5 +20,5 @@ public class Department {
     private int id;
     @Column(name = "department_id")
     private String name;
-    private List<Employee> employees;
+    //private List<Employee> employees = new ArrayList<>();;
 }
